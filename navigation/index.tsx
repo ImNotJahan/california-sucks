@@ -14,8 +14,12 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import SummaryScreen from '../screens/SummaryScreen';
+import FireScreen from '../screens/Fire';
+import Dust from '../screens/Dust';
+import Polution from '../screens/Polution';
+import Light from '../screens/Light';
+import Temperature from '../screens/Temperature';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -41,7 +45,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Info" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -58,19 +62,19 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Summary"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="Summary"
+        component={SummaryScreen}
+        options={({ navigation }: RootTabScreenProps<'Summary'>) => ({
+          title: 'Summary',
+          tabBarIcon: ({ color }) => <TabBarIcon name="clipboard" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate('Info')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
@@ -84,12 +88,45 @@ function BottomTabNavigator() {
           ),
         })}
       />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+	  <BottomTab.Screen
+        name="Dust"
+        component={Dust}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Dust',
+          tabBarIcon: ({ color }) => <TabBarIcon name="cloud" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Fire"
+        component={FireScreen}
+        options={{
+          title: 'Fire',
+          tabBarIcon: ({ color }) => <TabBarIcon name="fire" color={color} />,
+        }}
+      />
+	  <BottomTab.Screen
+        name="Polution"
+        component={Polution}
+        options={{
+          title: 'Polution',
+          tabBarIcon: ({ color }) => <TabBarIcon name="trash" color={color} />,
+        }}
+      />
+	  
+	 <BottomTab.Screen
+        name="Temperature"
+        component={Temperature}
+        options={{
+          title: 'Temperature',
+          tabBarIcon: ({ color }) => <TabBarIcon name="thermometer" color={color} />,
+        }}
+      />
+	  <BottomTab.Screen
+        name="Light"
+        component={Light}
+        options={{
+          title: 'Light',
+          tabBarIcon: ({ color }) => <TabBarIcon name="eye" color={color} />,
         }}
       />
     </BottomTab.Navigator>

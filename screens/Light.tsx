@@ -1,17 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import { RootTabScreenProps } from '../types';
 
-export default function ModalScreen() {
+export default function Light({ navigation }: RootTabScreenProps<'Light'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>California Sucks</Text>
-	  <Text>But it's easier to get through when you know what's happening. </Text>
-
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+      <Text style={styles.title}>Dust</Text>
     </View>
   );
 }
