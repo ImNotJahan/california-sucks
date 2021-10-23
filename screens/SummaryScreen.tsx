@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-import Config from "../config.js";
+import { OPENWEATHER_KEY } from "../config.js";
 
 export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summary'>)
 {
@@ -15,9 +15,11 @@ export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summar
 	const [light, setLight] = React.useState("Getting Today's Brightness...");
 	constructor()
 	{			
-		const temperatureAPI = "https://api.openweathermap.org/data/2.5/weather?q=bakersfield&units=imperial&appid=" + Config.OPENWEATHER_KEY;
-		const pollutionAPI = "https://api.openweathermap.org/data/2.5/air_pollution?lat=35.3733&lon=-119.0187&units=imperial&appid=" + Config.OPENWEATHER_KEY;
+		const temperatureAPI = "https://api.openweathermap.org/data/2.5/weather?q=bakersfield&units=imperial&appid=" + OPENWEATHER_KEY;
+		const pollutionAPI = "https://api.openweathermap.org/data/2.5/air_pollution?lat=35.3733&lon=-119.0187&units=imperial&appid=" + OPENWEATHER_KEY;
 		const fireRSS = "https://firefighterinsider.com/feed/";
+		
+		console.log(temperatureAPI);
 		
 		fetch(temperatureAPI)
 		  .then(response => response.json())
@@ -26,7 +28,8 @@ export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summar
 				setTemperature(evaluate(temp) + " (" + temp + "°F)");
 		  })
 		  .catch((e) => {
-			setTemperature("Something went wrong\n(" + e + ")");
+			  if(e instanceof TypeError) setTemperature("API isn't working");
+			  else setTemperature("Something went wrong\n(" + e + ")");
 		  });
 		  
 		  fetch(pollutionAPI)
@@ -38,7 +41,8 @@ export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summar
 				setDust(dustEval(dust) + " (" + dust + " PM)")
 		  })
 		  .catch((e) => {
-			setAir("Something went wrong\n(" + e + ")");
+			if(e instanceof TypeError) setAir("API isn't working");
+			  else setAir("Something went wrong\n(" + e + ")");
 		  });
 		  
 		  fetch(fireRSS)
@@ -47,11 +51,10 @@ export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summar
 				setFire("There are " + getSubstringAmount(data, "<item>") + " fires nearby");
 			})
 		  .catch((e) => {
-			setAir("Something went wrong\n(" + e + ")");
+			if(e instanceof TypeError) setFire("API isn't working");
+			  else setFire("Something went wrong\n(" + e + ")");
 		  });
-		  
-		  console.log("Constructor called")
-	}
+		}
 	
 	function getSubstringAmount(string, word) 
 	{
