@@ -8,7 +8,6 @@ import { RootTabScreenProps } from '../types';
 export default function Fire({ navigation }: RootTabScreenProps<'Fire'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dust</Text>
     </View>
   );
 }

@@ -108,7 +108,7 @@ function BottomTabNavigator() {
         name="Polution"
         component={Polution}
         options={{
-          title: 'Polution',
+          title: 'Pollution',
           tabBarIcon: ({ color }) => <TabBarIcon name="trash" color={color} />,
         }}
       />

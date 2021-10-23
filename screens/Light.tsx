@@ -8,7 +8,6 @@ import { RootTabScreenProps } from '../types';
 export default function Light({ navigation }: RootTabScreenProps<'Light'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Dust</Text>
     </View>
   );
 }
