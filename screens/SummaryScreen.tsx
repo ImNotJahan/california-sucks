@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import Config from "../config.js";
 
 export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summary'>)
 {
@@ -14,8 +15,8 @@ export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summar
 	const [light, setLight] = React.useState("Getting Today's Brightness...");
 	constructor()
 	{			
-		const temperatureAPI = "https://api.openweathermap.org/data/2.5/weather?q=bakersfield&units=imperial&appid=e58e28a893b3474c08301a4693028455";
-		const pollutionAPI = "https://api.openweathermap.org/data/2.5/air_pollution?lat=35.3733&lon=-119.0187&units=imperial&appid=e58e28a893b3474c08301a4693028455";
+		const temperatureAPI = "https://api.openweathermap.org/data/2.5/weather?q=bakersfield&units=imperial&appid=" + Config.OPENWEATHER_KEY;
+		const pollutionAPI = "https://api.openweathermap.org/data/2.5/air_pollution?lat=35.3733&lon=-119.0187&units=imperial&appid=" + Config.OPENWEATHER_KEY;
 		const fireRSS = "https://firefighterinsider.com/feed/";
 		
 		fetch(temperatureAPI)
@@ -48,6 +49,8 @@ export default function SummaryScreen({ navigation }: RootTabScreenProps<'Summar
 		  .catch((e) => {
 			setAir("Something went wrong\n(" + e + ")");
 		  });
+		  
+		  console.log("Constructor called")
 	}
 	
 	function getSubstringAmount(string, word) 
