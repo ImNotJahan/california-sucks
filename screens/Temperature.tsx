@@ -21,8 +21,8 @@ export default function TemperatureScreen({ navigation }: RootTabScreenProps<'Te
 		  .then(response => response.json())
 		  .then(data => {
 				var temp = data.main.temp;
-				setTemperature(temp + "°F");
-				setFeelsLike(data.main.feels_like);
+				setTemperature(temp + "°F " + evaluateTemp(temp));
+				setFeelsLike(data.main.feels_like + "°F");
 				setRange(data.main.temp_min + "°F and " + data.main.temp_max + "°F");
 				setWind("Moving at " + data.wind.speed + "MPH\nDirected at a " + data.wind.deg + "° angle\nGusting at " + data.wind.gust + "MPH");
 		  })
@@ -31,11 +31,22 @@ export default function TemperatureScreen({ navigation }: RootTabScreenProps<'Te
 			  else setTemperature("Something went wrong\n(" + e + ")");
 		  });
 	}
+
+	function evaluateTemp(temp)
+	{
+		if(temp > 110) return "🌋";
+		if(temp > 85) return "☀";
+		if(temp > 65) return "🌈";
+		if(temp > 40) return "🧣";
+		if(temp > 10) return "❄";
+		if(temp > -15) return "☃";
+		return "🌌";
+	}
 	
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{temperature}</Text>
-	  <Text>Feels like {feelsLike}°F</Text>
+	  <Text>Feels like {feelsLike}</Text>
 	  <Text>Will range between {range}{"\n"}</Text>
 	  <Text style={styles.title}>Wind</Text>
 	  <Text>{wind}</Text>

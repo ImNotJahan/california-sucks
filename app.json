@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "california-sucks",
+    "name": "California Sucks",
     "slug": "california-sucks",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.imnotjahan.california-sucks"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,6 +30,8 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/ImNotJahan/california-sucks"
   }
 }
